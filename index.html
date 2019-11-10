@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Vue</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div class="app">
+    <!--Передача текста-->
+    <p>{{ message }}</p>
+    <!--Деректива v-model получает value данного input-->
+    <input type="text" v-model="name"/>
+    <!--Вывод value из input-->
+    <p>{{ name }}</p>
+    <!--Вывод value через еще одну дерективу-->
+    <input type="text" v-on:input="value = $event.target.value"/>
+    <p>{{ value }}</p>
+    <!--Обработчик событий (вызовит функцию onChange описанную в methods)-->
+    <input type="text" v-on:change="onChange"/>
+    <!--Зададим value по-умолчанию данные подставяться из test объекта data-->
+    <input type="text" v-bind:value="test"/>
+    <!--Показываем/скрываем элемент по условию-->
+    <p v-if="showName"> Текст текст текст</p>
+    <!--Показываем/скрываем элемент по дерективе v-else(если она нужна то она должна идти обязательно после дерективы v-if)-->
+    <p v-else>Name is hidden</p>
+    <!--Показываем/скрываеи элемент по условию (разница в том, что он будет именно скрыт, а не удален)-->
+    <p v-show="showName">Текст текст текст</p>
+    <!--Кнопка которая изменяет state showName на прямую (без вызова функции)-->
+    <button v-on:click="showName = !showName">Toggle</button>
+    <!--Кнопка которая изменяет state showName через вызов функции onClickBtn описанный в объекте methods-->
+    <button v-on:click="onClickBtn">Toggle state</button>
+    <!--С помощью метода computed будем следить за input firstName и lastName, а дальше вызов функции fullName-->
+    <input type="text" v-model="firstName" />
+    <input type="text" v-model="lastName" />
+    <p>{{ fullName }}</p>
+    <!--Вывод данных с помощью цикла ( в данном случае массив fruts)-->
+    <ul>
+      <li v-for="(frut, index) in fruts">
+        {{ frut }}
+      </li>
+    </ul>
+    <!--Добавление данных в массив-->
+    <button v-on:click="addFrut">Add Frut</button>
+    <!--Вывод данных из объекта info-->
+    <ul>
+      <li v-for="(value, key, i) in info">
+        <p>
+          <span>{{ key }}:</span>
+          {{ value }}
+        </p>
+      </li>
+    </ul>
+
+  </div>
+  <script src="main.js"></script>
+</body>
+
+</html>
