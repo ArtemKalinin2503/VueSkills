@@ -12,16 +12,16 @@
     <!--Передача текста-->
     <p>{{ message }}</p>
     <!--Деректива v-model получает value данного input-->
-    <input type="text" v-model="name"/>
+    <input type="text" v-model="name" />
     <!--Вывод value из input-->
     <p>{{ name }}</p>
     <!--Вывод value через еще одну дерективу-->
-    <input type="text" v-on:input="value = $event.target.value"/>
+    <input type="text" v-on:input="value = $event.target.value" />
     <p>{{ value }}</p>
     <!--Обработчик событий (вызовит функцию onChange описанную в methods)-->
-    <input type="text" v-on:change="onChange"/>
+    <input type="text" v-on:change="onChange" />
     <!--Зададим value по-умолчанию данные подставяться из test объекта data-->
-    <input type="text" v-bind:value="test"/>
+    <input type="text" v-bind:value="test" />
     <!--Показываем/скрываем элемент по условию-->
     <p v-if="showName"> Текст текст текст</p>
     <!--Показываем/скрываем элемент по дерективе v-else(если она нужна то она должна идти обязательно после дерективы v-if)-->
@@ -53,7 +53,52 @@
         </p>
       </li>
     </ul>
-
+    <!--Вывод телефона в консоль, а также валидация телефона на предмет ввода только цифр-->
+    <input type="text" v-model="phone" />
+    <!--Работа с формами Radio input по клику на которую изменяем div (divClass объявили в объекте data)-->
+    <div>
+      <label>Info</label>
+      <input type="radio" value="info" v-model="divClass" />
+      <label>Warning</label>
+      <input type="radio" value="warning" v-model="divClass" />
+      <div class="alert" :class="divClassName">
+        <!--Добавим класс данному div исходя что вернет divClass (divClassName - это функция описанная в объекте computed )-->
+        {{ divClass }}
+      </div>
+    </div>
+    <!--Работа с формами Checkbox input - исходя из возвращенного состояния будут применяться классы к div-->
+    <div>
+      <div v-for="(value, name) in flags">
+        <!--Перебор объекта flags и выведим input столько раз сколько элементов в массиве-->
+        <input type="checkbox" v-model="flags[name]" />
+        {{ name }}
+      </div>
+      <div :class="flags">
+        <!--В класс будет приходить значение flags - которое соотвествует значению которое указано в объекте flags (описанное в data)-->
+        Style div checkbox
+      </div>
+    </div>
+    <!--Работа с инлайн стилями (стили будут приходить из value поля ввода input)-->
+    <div v-for="(value, name) in properties">
+      <!--Перебор объекта properties и выведим input столько раз сколько элементов в объекте-->
+      <input type="text" v-model="properties[name]" />
+      <p>{{ name }}</p>
+    </div>
+    <p :style="properties">Text style v-model</p>
+    <!--В style будет приходить значение из properties которое объявлено в массиве data и в которое подставиться значение из input-->
+    <!--Обработка событий на элементах input (когда input-ов много и нужно повесить обрабочик на каждый input)-->
+    <div v-for="(item, index) in inputForm">
+      <label>{{ item.name }}</label>
+      <input type="text" :value="item.value" @input="onInput(index, $event.target.value)" />
+    </div>
+    <!--Вывод компонента-->
+    <!-- <div>
+        <Test-some v-for="(elem, index) in randomNumber" :key="index"
+        :min="elem.min"
+        :max="elem.max"
+        >
+        </Test-some>
+    </div> -->
   </div>
   <script src="main.js"></script>
 </body>
