@@ -1,8 +1,8 @@
-//Компонент product-list
+//Компонент product-list (без Vuex)
 <template>
     <div>
         <!--В свойство :product передаем item product который будет брать данные из массива products-->
-        <productItem v-for="(product, i) in products" :key="i" :product="product" :index="(i+1)"></productItem>
+        <productItem v-for="(product, i) in products" :key="i" :product="product" :index="(i+1)" @viewDetails="viewDetails" ></productItem>
     </div>
 </template>
 
@@ -37,6 +37,11 @@
                         qt: 30
                     }
                 ]
+            }
+        },
+        methods: {
+            viewDetails(id) {
+                alert(id)
             }
         }
     }
