@@ -26,7 +26,7 @@ export default new Vuex.Store({
     getters: {
         getProducts: state => state.productsState
     },
-    //Actions - описывают как будет изменяться state путем вызова mutations
+    //Actions - описывают как будет изменяться state путем вызова mutations (action не может сам менять state только через mutation)
     actions: {
         actionLoadProducts(context, productsState) {
             context.commit('loadProducts', productsState)
