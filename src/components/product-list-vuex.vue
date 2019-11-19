@@ -24,7 +24,7 @@
             }
         },
         created() {
-           this.$store.dispatch('actionLoadProducts', this.$store.state.productsState) //Вызовим action и прокинем в него данные
+           this.$store.dispatch('actionLoadProducts', this.$store.state.productsState) //Вызовим action и прокинем в него данные (если надо передать несколько данных: name: this.name, phone: this.phone)
         },
         //В методах описываем функции
         methods: {
