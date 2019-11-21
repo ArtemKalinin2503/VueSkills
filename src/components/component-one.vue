@@ -2,51 +2,96 @@
 <template>
   <div>
     <!--Передача текста-->
-    <p>{{ message }}</p>
+    <div>
+       <p>{{ message }}</p>
+    </div>
     <!--Деректива v-model получает value данного input-->
-    <input type="text" v-model="name" />
-    <!--Вывод value из input-->
-    <p>{{ name }}</p>
+    <div>
+      <input type="text" v-model="name" />
+      <!--Вывод value из input-->
+      <p>{{ name }}</p>
+    </div>
+    <!--Вывод url с помощью дерективы :href-->
+    <div>
+      <a :href="url">https://google.com</a>
+    </div>
+    <!--Обработка события click -->
+    <div>
+      <p>{{ counter }}</p>
+      <button @click="riseCounter">Counter</button>
+    </div>
+    <!--Обработка события плюс работа с html элементом на котором произошло событие-->
+    <div>
+      <p @mouseover="onHover">Text html love</p>
+    </div>
+    <!--Обработка события клик и передача параметра и изменение стиля кнопки-->
+    <div>
+      <h2>{{ counter2 }}</h2>
+      <button @click="counClick(5, $event)">Увеличить на 5</button>
+      <button @click="counClick(10, $event)">Увеличить на 10</button>
+    </div>
     <!--Вывод value через еще одну дерективу-->
-    <input type="text" v-on:input="value = $event.target.value" />
-    <p>{{ value }}</p>
+    <div>
+      <input type="text" v-on:input="value = $event.target.value" />
+      <p>{{ value }}</p>
+    </div>
     <!--Обработчик событий (вызовит функцию onChange описанную в methods)-->
-    <input type="text" v-on:change="onChange" />
+    <div>
+      <input type="text" v-on:change="onChange" />
+    </div>
     <!--Зададим value по-умолчанию данные подставяться из test объекта data-->
-    <input type="text" v-bind:value="test" />
+    <div>
+      <input type="text" v-bind:value="test" />
+    </div>
     <!--Показываем/скрываем элемент по условию-->
-    <p v-if="showName">Текст текст текст</p>
-    <!--Показываем/скрываем элемент по дерективе v-else(если она нужна то она должна идти обязательно после дерективы v-if)-->
-    <p v-else>Name is hidden</p>
+    <div>
+      <p v-if="showName">Текст текст текст</p>
+      <!--Показываем/скрываем элемент по дерективе v-else(если она нужна то она должна идти обязательно после дерективы v-if)-->
+      <p v-else>Name is hidden</p>
+    </div>
+    <!--Изменение класса элемента по условию из state-->
+    <div>
+      <p @:click="isActive" :class="{'red': isActive, 'green': !isActive}">Text text text</p>
+    </div>
     <!--Показываем/скрываеи элемент по условию (разница в том, что он будет именно скрыт, а не удален)-->
-    <p v-show="showName">Текст текст текст</p>
-    <!--Кнопка которая изменяет state showName на прямую (без вызова функции)-->
-    <button v-on:click="showName = !showName">Toggle</button>
-    <!--Кнопка которая изменяет state showName через вызов функции onClickBtn описанный в объекте methods-->
-    <button v-on:click="onClickBtn">Toggle state</button>
+    <div>
+      <p v-show="showName">Текст текст текст</p>
+      <!--Кнопка которая изменяет state showName на прямую (без вызова функции)-->
+      <button v-on:click="showName = !showName">Toggle</button>
+      <!--Кнопка которая изменяет state showName через вызов функции onClickBtn описанный в объекте methods-->
+      <button v-on:click="onClickBtn">Toggle state</button>
+    </div>
     <!--С помощью метода computed будем следить за input firstName и lastName, а дальше вызов функции fullName-->
-    <input type="text" v-model="firstName" />
-    <input type="text" v-model="lastName" />
-    <p>{{ fullName }}</p>
+    <div>
+      <input type="text" v-model="firstName" />
+      <input type="text" v-model="lastName" />
+      <p>{{ fullName }}</p>
+    </div>
     <!--Вывод данных с помощью цикла ( в данном случае массив fruts)-->
-    <ul>
-      <li v-for="(frut, index) in fruts" :key="index">
-        {{ frut }}
-      </li>
-    </ul>
-    <!--Добавление данных в массив-->
-    <button v-on:click="addFrut">Add Frut</button>
+    <div>
+      <ul>
+        <li v-for="(frut, index) in fruts" :key="index">
+          {{ frut }}
+        </li>
+      </ul>
+      <!--Добавление данных в массив-->
+      <button v-on:click="addFrut">Add Frut</button>
+    </div>
     <!--Вывод данных из объекта info-->
-    <ul>
-      <li v-for="(value, key, i) in info" :key="i">
-        <p>
-          <span>{{ key }}:</span>
-          {{ value }}
-        </p>
-      </li>
-    </ul>
+    <div>
+      <ul>
+          <li v-for="(value, key, i) in info" :key="i">
+            <p>
+              <span>{{ key }}:</span>
+              {{ value }}
+            </p>
+          </li>
+        </ul>
+    </div>
     <!--Вывод телефона в консоль, а также валидация телефона на предмет ввода только цифр-->
-    <input type="text" v-model="phone" />
+    <div>
+      <input type="text" v-model="phone" />
+    </div>
     <!--Работа с формами Radio input по клику на которую изменяем div (divClass объявили в объекте data)-->
     <div>
       <label>Info</label>
@@ -75,9 +120,9 @@
       <!--Перебор объекта properties и выведим input столько раз сколько элементов в объекте-->
       <input type="text" v-model="properties[name]" />
       <p>{{ name }}</p>
+      <!--В style будет приходить значение из properties которое объявлено в массиве data и в которое подставиться значение из input-->
+      <p :style="properties">Text style v-model</p>
     </div>
-    <p :style="properties">Text style v-model</p>
-    <!--В style будет приходить значение из properties которое объявлено в массиве data и в которое подставиться значение из input-->
     <!--Обработка событий на элементах input (когда input-ов много и нужно повесить обрабочик на каждый input)-->
     <div v-for="(item, index) in inputForm" :key="index">
       <label>{{ item.name }}</label>
@@ -101,9 +146,13 @@ export default {
   data: function() {
     return {
       count: 0,
+      counter: 0,
+      counter2: 0,
       message: "vue test",
       name: "",
+      url: "http://google.com",
       value: "",
+      isActive: false,
       test: "test value",
       showName: false,
       firstName: "",
@@ -151,11 +200,26 @@ export default {
   },
   //Методы
   methods: {
+    riseCounter() {
+      this.counter++
+    },
     onChange() {
       alert("!!!!!!");
     },
+    onHover(event) {
+      event.target.style.color = "red"
+    },
     onClickBtn() {
       this.showName = !this.showName;
+    },
+    counClick(num, event) {
+      this.counter2 += num;
+      if(num === 5) {
+        event.target.style.color = "red"
+      }
+      if(num === 10) {
+        event.target.style.color = "green"
+      }
     },
     addFrut() {
       this.fruts.push("new frut");
@@ -208,4 +272,18 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+  div {
+    border: 1px solid green;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px 0px rgba(50, 50, 50, 0.75);
+  }
+  .red {
+    color: red;
+  }
+  .green {
+    color: green;
+  }
+</style>
