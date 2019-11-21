@@ -1,6 +1,6 @@
 // Компонент component-one
 <template>
-  <div>
+  <div class="wrapper">
     <!--Передача текста-->
     <div>
        <p>{{ message }}</p>
@@ -198,7 +198,7 @@ export default {
       }
     };
   },
-  //Методы
+  //Методы - это функции
   methods: {
     riseCounter() {
       this.counter++
@@ -253,7 +253,7 @@ export default {
   update() {
     console.log("update"); //Отрабатывает каждый раз когда изменяеться state
   },
-  //Метод computed следит за изменениями state firstName и lastName и вызывает функцию fullName
+  //Метод computed следит за изменениями state и отрабатывает каждый раз когда изменяеться state
   computed: {
     fullName() {
       return this.firstName + " " + this.lastName;
@@ -279,6 +279,33 @@ export default {
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0px 0px 4px 0px rgba(50, 50, 50, 0.75);
+  }
+  p {
+    font-size: 18px;
+  }
+  input {
+    border: 1px solid silver;
+    padding: 10px;
+    border-radius: 5px;
+    display: block;
+    margin-top: 10px;
+  }
+  button {
+    background: goldenrod;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px 0px rgba(50, 50, 50, 0.75);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+  }
+  .wrapper {
+    max-width: 1400px;
+    margin: auto;
   }
   .red {
     color: red;
